@@ -12,17 +12,32 @@ const knex = require("knex")({
 //put user
 
 async function getUser() {
-  const users = JSON.parse(JSON.stringify(await knex.select().table("users")));
-  const UReturn = users.slice();
-  for (let i = 0; i < users.length; i++) {
-    const user = users[i];
-  }
-  return UReturn;
+  const users = JSON.parse(
+    JSON.stringify(
+      await knex
+        .select()
+        .table("users")
+        .join("addresses", "users.id", "=", "addresses.user_id")
+    )
+  );
+
+  return users;
 }
+//.table("products")
+//.innerJoin("brands", "products.brand_id", "=", "brands.id")
 async function updateUser(id, user) {
-  await knex("users").where("id", "=", id).update({
-    name: user.name,
-  });
+  await knex
+    .select()
+    .table("users")
+    .innerJoin("addresses", "users.id", "=", "addresses.user_id")
+    .where("users.id", "=", id)
+    .update({
+      name: user.name,
+      street: user.city,
+      city: user.city,
+      state: user.state,
+      zipcode: parseInt(user.zipcode),
+    });
   return;
 }
 

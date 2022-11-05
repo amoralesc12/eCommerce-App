@@ -10,7 +10,7 @@ async function update(req, res) {
   const { id } = req.params;
   const user = req.body;
   await userService.updateUser(id, user);
-  res.status(204).send();
+  res.send();
 }
 
 module.exports = {

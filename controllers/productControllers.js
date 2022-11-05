@@ -6,13 +6,13 @@ async function getP(req, res) {
   res.send(products);
 }
 
-async function getProductS(req, res) {
+async function getPS(req, res) {
   const { name } = req.query;
-  const name_search = await productService.getProductSearch(name);
+  const name_search = await productService.getP_S(name);
   res.send(name_search);
 }
 
 module.exports = {
   getP,
-  getProductS,
+  getPS,
 };

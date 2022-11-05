@@ -16,15 +16,12 @@ async function getProduct(limit, offset) {
       await knex.select().table("products").limit(limit).offset(offset)
     )
   );
-  const productsReturn = products.slice();
-  for (let i = 0; i < products.length; i++) {
-    const product = products[i];
-  }
-  return productsReturn;
+
+  return products;
 }
 
-async function getProductSearch(name_CB) {
-  const products = JSON.parse(
+async function getP_S(name_CB) {
+  const product = JSON.parse(
     JSON.stringify(
       await knex
         .select(
@@ -37,15 +34,15 @@ async function getProductSearch(name_CB) {
         .table("products")
         .innerJoin("brands", "products.brand_id", "=", "brands.id")
         .innerJoin("categories", "categories.id", "=", "products.category_id")
-        .whereLike("name", "&name_CB%")
+        .whereLike("products.name", "%" + name_CB + "%")
     )
   );
 
-  return products;
+  return product;
 }
 
 module.exports = {
   getProduct,
-  getProductSearch,
+  getP_S,
 };
 //TODO: GET PRODUCT/SEARCH
