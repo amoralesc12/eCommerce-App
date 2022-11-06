@@ -15,7 +15,15 @@ async function getUser() {
   const users = JSON.parse(
     JSON.stringify(
       await knex
-        .select()
+        .select(
+          "users.id as ID:",
+          "users.name as NAME:",
+          "addresses.id as ADDRESS ID:",
+          "addresses.street as STREET:",
+          "addresses.city as CITY:",
+          "addresses.state as STATE:",
+          "addresses.zipcode as ZIPCODE:"
+        )
         .table("users")
         .join("addresses", "users.id", "=", "addresses.user_id")
     )
@@ -23,8 +31,7 @@ async function getUser() {
 
   return users;
 }
-//.table("products")
-//.innerJoin("brands", "products.brand_id", "=", "brands.id")
+
 async function updateUser(id, user) {
   await knex
     .select()
@@ -33,11 +40,12 @@ async function updateUser(id, user) {
     .where("users.id", "=", id)
     .update({
       name: user.name,
-      street: user.city,
+      street: user.street,
       city: user.city,
       state: user.state,
       zipcode: parseInt(user.zipcode),
     });
+
   return;
 }
 

@@ -19,9 +19,8 @@ async function getProduct(limit, offset) {
 
   return products;
 }
-
-async function getP_S(name_CB) {
-  const product = JSON.parse(
+async function getPS(name) {
+  const pSearch = JSON.parse(
     JSON.stringify(
       await knex
         .select(
@@ -34,15 +33,14 @@ async function getP_S(name_CB) {
         .table("products")
         .innerJoin("brands", "products.brand_id", "=", "brands.id")
         .innerJoin("categories", "categories.id", "=", "products.category_id")
-        .whereLike("products.name", "%" + name_CB + "%")
+        .whereLike("products.name", "%" + name + "%")
     )
   );
-
-  return product;
+  return pSearch;
 }
 
 module.exports = {
   getProduct,
-  getP_S,
+  getPS,
 };
 //TODO: GET PRODUCT/SEARCH
