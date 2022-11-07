@@ -3,12 +3,12 @@ function isDecimal(input) {
   return regex.test(input);
 }
 
-function IsString(string) {
+function isString(string) {
   return typeof string === "string";
 }
 
 module.exports = {
   isDecimal,
 
-  IsString,
+  isString,
 };
