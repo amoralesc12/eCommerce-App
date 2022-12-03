@@ -1,6 +1,6 @@
 const productService = require("../services/products");
 
-async function getP(req, res) {
+async function getProduct(req, res) {
   const { limit, offset } = req.query;
   const products = await productService.getProduct(limit, offset);
   res.send(products);
@@ -13,6 +13,6 @@ async function getProductS(req, res) {
 }
 
 module.exports = {
-  getP,
+  getProduct,
   getProductS,
 };

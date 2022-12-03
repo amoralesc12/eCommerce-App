@@ -2,15 +2,15 @@
 const knex = require("knex")({
   client: "mysql",
   connection: {
-    host: process.env.HOST,
+    host: "localhost",
     port: 3306,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
+    user: "root",
+    password: "Root2497!",
+    database: "ecomm",
   },
 });
 //revisar
-async function getProduct(limit, offset) {
+async function getProduct_ecomm(limit, offset) {
   const products = JSON.parse(
     JSON.stringify(
       await knex.select().table("products").limit(limit).offset(offset)
@@ -45,7 +45,7 @@ async function getP_Search(name_CB) {
 }
 
 module.exports = {
-  getProduct,
+  getProduct_ecomm,
   getP_Search,
 };
 //TODO: GET PRODUCT/SEARCH
